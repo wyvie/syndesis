@@ -234,6 +234,20 @@
       "secret": false,
       "type": "boolean"
     },
+    "starttls": {
+      "componentProperty": true,
+      "deprecated": false,
+      "displayName": "STARTTLS",
+      "group": "security",
+      "javaType": "java.lang.boolean",
+      "kind": "parameter",
+      "label": "starttls",
+      "labelHint": "Specify whether connection uses STARTTLS",
+      "order": "7",
+      "required": false,
+      "secret": false,
+      "type": "boolean"
+    },
     "serverCertificate": {
       "componentProperty": true,
       "deprecated": false,
@@ -243,7 +257,7 @@
       "javaType": "java.lang.String",
       "kind": "parameter",
       "label": "common,security",
-      "order": "7",
+      "order": "8",
       "relation": [
         {
           "action": "ENABLE",

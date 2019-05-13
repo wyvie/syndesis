@@ -32,6 +32,8 @@ public interface EMailConstants extends StringConstants {
 
     String PASSWORD = "password";
 
+    String STARTTLS = "starttls";
+
     String SSL_CONTEXT_PARAMETERS = "sslContextParameters";
 
     String SERVER_CERTIFICATE = "serverCertificate";

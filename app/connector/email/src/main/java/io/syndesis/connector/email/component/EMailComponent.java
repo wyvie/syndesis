@@ -46,6 +46,7 @@ public final class EMailComponent extends ComponentProxyComponent implements EMa
      */
     private String protocol;
     private boolean secure;
+    private boolean starttls;
     private String host;
     private int port = -1;
     private String username;
@@ -83,6 +84,14 @@ public final class EMailComponent extends ComponentProxyComponent implements EMa
 
     public void setSecure(boolean secure) {
         this.secure = secure;
+    }
+
+    public boolean isStarttls() {
+        return starttls;
+    }
+
+    public void setStarttls(boolean starttls) {
+        this.starttls = starttls;
     }
 
     public String getHost() {
@@ -155,6 +164,7 @@ public final class EMailComponent extends ComponentProxyComponent implements EMa
             .propertyIfNotNull(PROTOCOL, getProtocol())
             .propertyIfNotNull(HOST, getHost())
             .propertyIfNotNull(PORT, getPort())
+            .propertyIfNotNull(STARTTLS, isStarttls())
             .propertyIfNotNull(USER, getUsername())
             .propertyIfNotNull(PASSWORD, getPassword())
             .propertyIfNotNull(SERVER_CERTIFICATE, getServerCertificate())
@@ -192,6 +202,13 @@ public final class EMailComponent extends ComponentProxyComponent implements EMa
         configuration.setUsername(getUsername());
         configuration.setPassword(getPassword());
         configuration.setUnseen(isUnseenOnly());
+
+        if (isStarttls()) {
+            configuration.getAdditionalJavaMailProperties()
+                    .setProperty("mail.smtp.starttls.enable", "true");
+            configuration.getAdditionalJavaMailProperties()
+                    .setProperty("mail.smtp.starttls.required", "true");
+        }
 
         Map<String, Object> resolvedOptions = bundleOptions();
         SSLContextParameters sslContextParameters = EMailUtil.createSSLContextParameters(resolvedOptions);

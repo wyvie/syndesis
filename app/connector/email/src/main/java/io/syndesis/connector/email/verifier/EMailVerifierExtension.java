@@ -77,6 +77,14 @@ public class EMailVerifierExtension extends DefaultComponentVerifierExtension im
             parameters.put(SSL_CONTEXT_PARAMETERS, sslContextParameters);
             MailConfiguration configuration = setProperties(new MailConfiguration(), parameters);
 
+            String starttls = (String) parameters.get(STARTTLS);
+            if (ObjectHelper.isNotEmpty(starttls)) {
+                configuration.getAdditionalJavaMailProperties()
+                        .setProperty("mail.smtp.starttls.enable", "true");
+                configuration.getAdditionalJavaMailProperties()
+                        .setProperty("mail.smtp.starttls.required", "true");
+            }
+
             JavaMailSender sender = createJavaMailSender(configuration);
             Session session = sender.getSession();
 
